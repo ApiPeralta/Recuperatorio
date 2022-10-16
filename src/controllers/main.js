@@ -11,30 +11,35 @@ const mainController = {
       })
       .catch((error) => console.log(error));
   },
+
+  
   bookDetail: (req, res) => {
-  //   db.Book.findByPk(req.params.id).then((book) =>{     
-  //   res.render('bookDetail', {book})
-  // })
-  // db.Booksauthors.findOne({ where:{Author_Id : BookId }}).then((author) =>{
-        
-  //     res.render('bookDetail', {author})
   db.Book.findByPk(req.params.id, {
     include: [{ association: 'authors' }]
   })
     .then((book) => {
       res.render('bookDetail', { book });
 })},
+
+
+
   bookSearch: (req, res) => {
     res.render('search', { books: [] });
   },
+
+
   bookSearchResult: (req, res) => {
     // Implement search by title
     res.render('search');
   },
+
+  
   deleteBook: (req, res) => {
-    // Implement delete book
-    res.render('home');
-  },
+    db.Book.destroy({where:{Id : req.params.id}}).then(()=>{
+      res.render('/home')
+  })},
+
+
   authors: (req, res) => {
     db.Author.findAll()
       .then((authors) => {
@@ -42,10 +47,19 @@ const mainController = {
       })
       .catch((error) => console.log(error));
   },
+
+
+
   authorBooks: (req, res) => {
-    // Implement books by author
-    res.render('authorBooks');
-  },
+    db.Author.findByPk(req.params.id, {
+      include: [{ association: 'books' }]
+    })
+      .then((author) => {
+        res.render('authorBooks', { author });
+  })},
+
+
+
   register: (req, res) => {
     res.render('register');
   },
