@@ -40,9 +40,9 @@ const mainController = {
 
 
   deleteBook: (req, res) => {
-    db.Book.destroy({where:{id: req.params.id}}).then(()=>{
-      res.render('/home')
-  })},
+    db.Book.destroy({where:{id: req.params.id}})
+    res.redirect('/home')
+  },
 
 
   authors: (req, res) => {

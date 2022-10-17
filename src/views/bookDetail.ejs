@@ -23,8 +23,8 @@
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             
             <a href="/books/edit/<%= book.id %>"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button></a>
-            <form method="POST" action="/books/eliminar/<%= book.id %>?_method=DELETE">
-            <button class="btn btn-outline-secondary btn-lg px-4">Delete</button>
+            <form method="POST" action="/books/delete/<%= book.id %>">
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
             </form>
           </div>
         </div>
