@@ -23,7 +23,6 @@ const mainController = {
 })},
 
 
-
   bookSearch: (req, res) => {
     res.render('search', { books: [] });
   },
@@ -41,8 +40,8 @@ const mainController = {
 
 
   deleteBook: (req, res) => {
-    db.Book.destroy({where:{Id: req.params.id}}).then(()=>{
-      res.redirect('/home')
+    db.Book.destroy({where:{id: req.params.id}}).then(()=>{
+      res.render('/home')
   })},
 
 
@@ -53,7 +52,6 @@ const mainController = {
       })
       .catch((error) => console.log(error));
   },
-
 
 
   authorBooks: (req, res) => {
@@ -97,9 +95,9 @@ const mainController = {
   },
   processEdit: (req, res) => {
     db.Book.update({
-      Title: req.body.title,
-      Cover: req.body.cover,
-      Description: req.body.description
+      title: req.body.title,
+      cover: req.body.cover,
+      description: req.body.description
     }, {
       where: {
         Id: req.params.id
