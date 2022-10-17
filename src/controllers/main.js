@@ -92,7 +92,7 @@ const mainController = {
   },
   edit: (req, res) => {
     db.Book.findByPk(req.params.id)
-    .then(book => {res.render('editBook', { book })})
+    .then(book => {res.render('editBook', { book:book })})
     
   },
   processEdit: (req, res) => {
@@ -100,11 +100,12 @@ const mainController = {
       title: req.body.title,
       cover: req.body.cover,
       description: req.body.description
+    }, {
+      where: {
+        id: req.params.id
+      }
     })
-    .then(()=>{
-      res.render('home');
-    })
-
+    res.redirect('home')
   }
 };
 
