@@ -41,7 +41,7 @@ const mainController = {
 
 
   deleteBook: (req, res) => {
-    db.Book.destroy({where:{id: req.params.id}}).then(()=>{
+    db.Book.destroy({where:{Id: req.params.id}}).then(()=>{
       res.redirect('/home')
   })},
 
@@ -96,16 +96,16 @@ const mainController = {
     
   },
   processEdit: (req, res) => {
-    db.Book.Update({
-      title: req.body.title,
-      cover: req.body.cover,
-      description: req.body.description
+    db.Book.update({
+      Title: req.body.title,
+      Cover: req.body.cover,
+      Description: req.body.description
     }, {
       where: {
-        id: req.params.id
+        Id: req.params.id
       }
     })
-    res.redirect('home')
+    res.redirect('/books/edit/' + req.params.id)
   }
 };
 

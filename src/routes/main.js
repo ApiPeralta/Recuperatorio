@@ -13,8 +13,8 @@ router.get('/users/register', mainController.register);
 router.post('/users/register', mainController.processRegister);
 router.get('/users/login', mainController.login);
 router.post('/users/login', mainController.processLogin);
-router.delete('/books/:id', mainController.deleteBook);
+router.post('/books/:id', mainController.deleteBook);
 router.get('/books/edit/:id', mainController.edit);
-router.put('/books/edit/:id', mainController.processEdit);
+router.post('/books/edit/:id', mainController.processEdit);
 
 module.exports = router;
