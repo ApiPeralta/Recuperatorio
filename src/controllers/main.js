@@ -30,14 +30,14 @@ const mainController = {
 
 
   bookSearchResult: (req, res) => {
-    db.Book.findOne({
+    db.Book.findAll({
       include: [{ association: 'authors' }],
       where: {
         title: {[Op.like]: '%'+ req.body.title +'%'}
       },
-    }).then((book) => {
-      console.log("Encontre: " + book.title)
-      res.render('bookDetail', { book });
+    }).then((books) => {
+      console.log("Encontre: " + books.title)
+      res.render('home', { books });
     })
   },
 
