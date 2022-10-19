@@ -2,6 +2,7 @@ const bcryptjs = require('bcryptjs');
 const db = require('../database/models');
 const Op = db.sequelize.Op;
 
+
 const mainController = {
   home: (req, res) => {
     db.Book.findAll({
@@ -80,14 +81,34 @@ const mainController = {
       })
       .catch((error) => console.log(error));
   },
+
   login: (req, res) => {
-    // Implement login process
-    res.render('login');
+    res.render('login')
+    },
+
+  processLogin:(req,res)=>{ 
+    console.log(req.body)
+    db.User.findOne({ where:{Email : req.body.email}})
+    .then(user =>{
+        if(user){
+          console.log("MAIL VALIDO")
+            var validPassword = bcryptjs.compareSync(req.body.password, user.Pass)
+            if (validPassword) {
+                console.log("CONTRASEÑA VALIDA")
+                req.session.user = user;
+                res.redirect('/')
+            }
+            else{
+              console.log("CONTRASEÑA INVALIDA")
+                res.redirect('/users/login')
+            }
+        }else{
+          console.log("MAIL INVALIDO")
+            res.redirect('/users/login')
+        }
+    })
   },
-  processLogin: (req, res) => {
-    // Implement login process
-    res.render('home');
-  },
+
   edit: (req, res) => {
     db.Book.findByPk(req.params.id)
     .then(book => {res.render('editBook', { book:book })})
@@ -100,7 +121,7 @@ const mainController = {
       description: req.body.description
     }, {
       where: {
-        Id: req.params.id
+        id: req.params.id
       }
     })
     res.redirect('/books/edit/' + req.params.id)
