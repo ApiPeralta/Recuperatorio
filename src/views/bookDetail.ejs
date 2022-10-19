@@ -21,12 +21,14 @@
           <% }) %></p>
           <p class="lead mb-4"><%= book.description %></p>
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <% if(locals.user.CategoryId == 1) { %>
+            <% if(!locals.user) { %>
+              <p>No estas logueado</p>
+            <% } else if(locals.user.CategoryId == 1) {%>
             <a href="/books/edit/<%= book.id %>"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button></a>
             <form method="POST" action="/books/delete/<%= book.id %>">
             <button class="btn btn-outline-secondary btn-lg px-4">Delete</button>
-            <% } %>
             </form>
+            <% } %>
           </div>
         </div>
       </div>

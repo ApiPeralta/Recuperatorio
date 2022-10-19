@@ -113,11 +113,11 @@ const mainController = {
 
 
 
-  // logout: (req,res) =>{
-  //   req.session.destroy();
-  //   res.cookie('Email',null,{maxAge: -1});
-  //   res.redirect('/')
-  // },
+  logout: (req,res) =>{
+    req.session.destroy();
+    res.cookie('Email',null,{maxAge: -1});
+    res.redirect('/')
+  },
 
 
 
