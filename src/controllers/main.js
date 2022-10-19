@@ -17,7 +17,7 @@ const mainController = {
   
   bookDetail: (req, res) => {
   db.Book.findByPk(req.params.id, {
-    include: [{ association: 'authors' }]
+    include: [{ association: 'authors'}]
   })
     .then((book) => {
       res.render('bookDetail', { book });
@@ -110,6 +110,16 @@ const mainController = {
         }
     })
   },
+
+
+
+  // logout: (req,res) =>{
+  //   req.session.destroy();
+  //   res.cookie('Email',null,{maxAge: -1});
+  //   res.redirect('/')
+  // },
+
+
 
   edit: (req, res) => {
     db.Book.findByPk(req.params.id)
