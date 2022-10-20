@@ -47,9 +47,13 @@ deleteBook: (req, res) => {
       id: req.params.id
     },
     include: [{ association: 'authors' }]
-  }).then((books)=>{
-    res.render('home',{books});
   })
+  db.Book.findAll({
+    include: [{ association: 'authors' }]
+  })
+    .then((books) => {
+      res.render('home', { books });
+    })
 },
 
   authors: (req, res) => {
