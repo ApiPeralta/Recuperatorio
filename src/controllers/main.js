@@ -41,12 +41,16 @@ const mainController = {
     })
   },
 
-//BORRAR LA FK, ESTA ASOCIADO CON AUTHORS
-  deleteBook: (req, res) => {
-    db.Book.destroy({where:{id: req.params.id}})
-    res.redirect('/')
-  },
-
+deleteBook: (req, res) => {
+  db.Book.destroy({
+    where:{
+      id: req.params.id
+    },
+    include: [{ association: 'authors' }]
+  }).then((books)=>{
+    res.render('home',{books});
+  })
+},
 
   authors: (req, res) => {
     db.Author.findAll()
